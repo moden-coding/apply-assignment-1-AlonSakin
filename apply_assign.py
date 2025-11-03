@@ -2,15 +2,21 @@ import pandas as pd
 import numpy as np
 
 def assign_letter_grades(df):
-    pass
+    df["Grade"] = df["Exam_Score"].apply(lambda g: 'A' if g >= 90 else ('B' if g >= 80 else ('C' if g >= 70 else 'D')))
+
+    return df
 
 
 def calculate_adjusted_score(df):
-    pass
+    df["Adjusted_Score"] = df.apply(lambda r: r['Exam_Score'] + r['Study_Hours'] * 1.5 + r['Attendance'] * 10, axis=1)
+
+    return df
 
 
 def categorize_performance(df):
-    pass
+    df["Performance"] = df.apply(lambda row: 'Outstanding' if row["Grade"] == 'A' else ("Strong" if row["Grade"] == 'B' else ("Needs Improvement" if row["Grade"] in ['C', 'D'] else "Average")), axis=1)
+    
+    return df
 
 
 
